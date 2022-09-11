@@ -6,31 +6,37 @@ import (
 )
 
 func main() {
-	var colors = []string{"Red", "Green", "Blue"}
-	fmt.Println(colors)
+	states := make(map[string]string)
+	fmt.Println(states)
+	states["CU"] = "Central Uganda"
+	states["WNU"] = "West Nile Uganda"
+	states["EU"] = "Eastern Uganda"
+	states["NU"] = "Northern Uganda"
+	states["WU"] = "Western Uganda"
 
-	colors = append(colors, "Orange")
-	fmt.Println(colors)
+	fmt.Println(states)
+	fmt.Println(states["WNU"])
 
-	colors = append(colors[1:len(colors)])
-	fmt.Println(colors)
+	delete(states, "NU")
+	fmt.Println(states)
 
-	colors = append(colors[:len(colors)-1])
-	fmt.Println(colors)
+	for key, value := range states {
+		fmt.Printf("The full form of %v is %v\n", key, value)
+	}
 
-	numbers := make([]int, 5)
-	numbers[0] = 23
-	numbers[1] = 2
-	numbers[2] = 42
-	numbers[3] = 90
-	numbers[4] = 19
+	keys := make([]string, len(states))
 
-	numbers = append(numbers, 33)
-	numbers = append(numbers, 11)
+	i := 0
+	for k := range states {
+		keys[i] = k
+		i++
+	}
 
-	fmt.Println(numbers)
+	fmt.Println(keys)
+	sort.Strings(keys)
+	fmt.Println(keys)
 
-	sort.Ints(numbers)
-	fmt.Println(numbers)
-
+	for i := range keys {
+		fmt.Println(states[keys[i]])
+	}
 }
