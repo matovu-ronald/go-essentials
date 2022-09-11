@@ -3,17 +3,16 @@ package main
 import "fmt"
 
 func main() {
-	anInteger := 26
+	var colors [3]string
+	colors[0] = "Red"
+	colors[1] = "Green"
+	colors[2] = "Blue"
+	fmt.Println(colors)
+	fmt.Println(colors[1])
 
-	var p = &anInteger
-	fmt.Println("Value of p: ", *p)
+	var numbers = [5]int{2, 4, 3, 5, 9}
+	fmt.Println(numbers)
 
-	value1 := 24.13
-	pointer1 := &value1
-
-	fmt.Println("Value 1: ", *pointer1)
-
-	*pointer1 = *pointer1 * 2
-	fmt.Println("Pointer 1: ", *pointer1)
-	fmt.Println("Value 1: ", value1)
+	fmt.Println("Number of colors: ", len(colors))
+	fmt.Println("Number of numbers: ", len(numbers))
 }
