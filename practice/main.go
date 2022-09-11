@@ -1,18 +1,36 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	var colors [3]string
-	colors[0] = "Red"
-	colors[1] = "Green"
-	colors[2] = "Blue"
+	var colors = []string{"Red", "Green", "Blue"}
 	fmt.Println(colors)
-	fmt.Println(colors[1])
 
-	var numbers = [5]int{2, 4, 3, 5, 9}
+	colors = append(colors, "Orange")
+	fmt.Println(colors)
+
+	colors = append(colors[1:len(colors)])
+	fmt.Println(colors)
+
+	colors = append(colors[:len(colors)-1])
+	fmt.Println(colors)
+
+	numbers := make([]int, 5)
+	numbers[0] = 23
+	numbers[1] = 2
+	numbers[2] = 42
+	numbers[3] = 90
+	numbers[4] = 19
+
+	numbers = append(numbers, 33)
+	numbers = append(numbers, 11)
+
 	fmt.Println(numbers)
 
-	fmt.Println("Number of colors: ", len(colors))
-	fmt.Println("Number of numbers: ", len(numbers))
+	sort.Ints(numbers)
+	fmt.Println(numbers)
+
 }
