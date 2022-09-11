@@ -1,25 +1,19 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
-	"strings"
+	"math"
 )
 
 func main() {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Enter text: ")
-	input, _ := reader.ReadString('\n')
-	fmt.Println("You entered: ", input)
+	int1, int2, int3 := 12, 45, 97
+	intSum := int1 + int2 + int3
+	fmt.Println("Integer sum: ", intSum)
 
-	fmt.Print("Enter a number: ")
-	numInput, _ := reader.ReadString('\n')
-	aFloat, error := strconv.ParseFloat(strings.TrimSpace(numInput), 64)
-	if error != nil {
-		fmt.Println(error)
-	} else {
-		fmt.Println("Value of the number: ", aFloat)
-	}
+	float1, float2, float3 := 23.5, 65.1, 76.3
+	floatSum := float1 + float2 + float3
+	fmt.Println("Float sum: ", floatSum)
+
+	floatSum = math.Round(floatSum*100) / 100
+	fmt.Println("The sum is now", floatSum)
 }
