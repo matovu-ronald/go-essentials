@@ -1,42 +1,16 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
+import "fmt"
 
 func main() {
-	states := make(map[string]string)
-	fmt.Println(states)
-	states["CU"] = "Central Uganda"
-	states["WNU"] = "West Nile Uganda"
-	states["EU"] = "Eastern Uganda"
-	states["NU"] = "Northern Uganda"
-	states["WU"] = "Western Uganda"
+	poodle := Dog{"Poodle", 10}
+	fmt.Println(poodle)
+	fmt.Printf("%+v\n", poodle)
+	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
+}
 
-	fmt.Println(states)
-	fmt.Println(states["WNU"])
-
-	delete(states, "NU")
-	fmt.Println(states)
-
-	for key, value := range states {
-		fmt.Printf("The full form of %v is %v\n", key, value)
-	}
-
-	keys := make([]string, len(states))
-
-	i := 0
-	for k := range states {
-		keys[i] = k
-		i++
-	}
-
-	fmt.Println(keys)
-	sort.Strings(keys)
-	fmt.Println(keys)
-
-	for i := range keys {
-		fmt.Println(states[keys[i]])
-	}
+// Dog is a struct
+type Dog struct {
+	Breed  string
+	Weight int
 }
