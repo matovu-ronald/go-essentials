@@ -3,38 +3,31 @@ package main
 import "fmt"
 
 func main() {
-	colors := []string{"Red", "Green", "Blue"}
-	fmt.Println(colors)
+	doSomething()
+	sum := addValues(3, 5)
+	fmt.Println("The sum is", sum)
 
-	for i := 0; i < len(colors); i++ {
-		fmt.Println(colors[i])
+	multiSum, multiCount := addAllValues(4, 7, 9)
+	fmt.Println("Sum of mulitple values: ", multiSum)
+	fmt.Println("Count of items: ", multiCount)
+}
+
+func doSomething() {
+	fmt.Println("Doing something")
+}
+
+// func addValues(value1 int, value2 int) int {
+// 	return value1 + value2
+// }
+
+func addValues(value1, value2 int) int {
+	return value1 + value2
+}
+
+func addAllValues(values ...int) (int, int) {
+	total := 0
+	for _, v := range values {
+		total += v
 	}
-
-	for i := range colors {
-		fmt.Println(colors[i])
-	}
-
-	for _, color := range colors {
-		fmt.Println(color)
-	}
-
-	value := 1
-
-	for value < 10 {
-		fmt.Println("Value: ", value)
-		value++
-	}
-
-	sum := 1
-
-	for sum < 1000 {
-		sum += sum
-		fmt.Println("Sum: ", sum)
-		if sum > 200 {
-			goto theEnd
-		}
-	}
-
-theEnd:
-	fmt.Println("End of the program")
+	return total, len(values)
 }
