@@ -1,31 +1,62 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"io"
 	"io/ioutil"
-	"os"
+	"net/http"
+	"strings"
 )
 
+const url = "http://services.explorecalifornia.org/json/tours.php"
+
 func main() {
-	content := "Hello from Go!"
-	file, err := os.Create("./fromString.txt")
+
+	response, err := http.Get(url)
 	checkError(err)
-	length, err := io.WriteString(file, content)
+	fmt.Printf("Response type: %T\n", response)
+
+	defer response.Body.Close()
+
+	bytes, err := ioutil.ReadAll(response.Body)
 	checkError(err)
-	fmt.Printf("Wrote a file with %v characters\n", length)
-	defer file.Close()
-	defer readFile("./fromString.txt")
+
+	content := string(bytes)
+	// fmt.Print(content)
+
+	tours := toursFromJson(content)
+	for _, tour := range tours {
+		fmt.Println(tour.Name)
+	}
+
+}
+
+func toursFromJson(content string) []Tour {
+	tours := make([]Tour, 0)
+	decoder := json.NewDecoder(strings.NewReader(content))
+	_, err := decoder.Token()
+	if err != nil {
+		panic(err)
+	}
+
+	var tour Tour
+	for decoder.More() {
+		err := decoder.Decode(&tour)
+		if err != nil {
+			panic(err)
+		}
+		tours = append(tours, tour)
+	}
+
+	return tours
+}
+
+type Tour struct {
+	Name, Price string
 }
 
 func checkError(err error) {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func readFile(fileName string) {
-	data, err := ioutil.ReadFile(fileName)
-	checkError(err)
-	fmt.Println("Text read from file:", string(data))
 }
